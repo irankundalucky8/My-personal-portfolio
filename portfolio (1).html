@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- EDIT: page title shown in the browser tab -->
+<title>Your Name | Portfolio</title>
+<meta name="description" content="Portfolio and CV of Your Name">
+
+<style>
+  /* ============================================================
+     QUICK THEME: change these colours / font to restyle the page
+     ============================================================ */
+  :root {
+    --bg: #ffffff;
+    --text: #1c1c1c;
+    --muted: #6b6b6b;
+    --line: #e4e4e0;
+    --accent: #2f5d50;          /* change this to any colour you like */
+    --font: "Inter", "Segoe UI", system-ui, -apple-system, Helvetica, Arial, sans-serif;
+    --max: 760px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font);
+    font-size: 16px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: var(--accent); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color .2s; }
+  a:hover { border-bottom-color: var(--accent); }
+
+  .wrap { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+
+  /* ---------- Top nav ---------- */
+  nav {
+    position: sticky; top: 0; z-index: 10;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  nav .wrap { display: flex; justify-content: space-between; align-items: center; height: 56px; }
+  nav .brand { font-weight: 600; letter-spacing: .01em; color: var(--text); border: none; }
+  nav ul { list-style: none; display: flex; gap: 22px; }
+  nav ul a { color: var(--muted); font-size: 14px; }
+  nav ul a:hover { color: var(--text); border-color: transparent; }
+
+  /* ---------- Header / hero ---------- */
+  header { padding: 88px 0 56px; }
+  .hero { display: flex; gap: 32px; align-items: center; }
+  .photo {
+    width: 112px; height: 112px; border-radius: 50%;
+    object-fit: cover; flex-shrink: 0;
+    background: var(--line);
+    border: 1px solid var(--line);
+  }
+  h1 { font-size: clamp(2rem, 5vw, 2.8rem); font-weight: 700; line-height: 1.15; letter-spacing: -.02em; }
+  .role { color: var(--accent); font-weight: 500; margin-top: 6px; }
+  .contact { margin-top: 18px; display: flex; flex-wrap: wrap; gap: 6px 20px; font-size: 14px; color: var(--muted); }
+  .contact a { color: var(--muted); }
+  .contact a:hover { color: var(--accent); }
+
+  /* ---------- Sections ---------- */
+  section { padding: 44px 0; border-top: 1px solid var(--line); }
+  h2 {
+    font-size: 12px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: .16em;
+    color: var(--muted); margin-bottom: 28px;
+  }
+
+  p + p { margin-top: 14px; }
+
+  /* Timeline-style entries (education, experience) */
+  .entry { display: grid; grid-template-columns: 150px 1fr; gap: 8px 28px; margin-bottom: 30px; }
+  .entry:last-child { margin-bottom: 0; }
+  .when { color: var(--muted); font-size: 14px; padding-top: 2px; }
+  .entry h3 { font-size: 17px; font-weight: 600; line-height: 1.35; }
+  .where { color: var(--muted); font-size: 15px; }
+  .entry ul { margin-top: 10px; padding-left: 18px; color: var(--text); }
+  .entry li { margin-bottom: 4px; }
+  .entry li::marker { color: var(--accent); }
+
+  /* Projects */
+  .projects { display: grid; gap: 18px; }
+  .project {
+    border: 1px solid var(--line); border-radius: 10px;
+    padding: 20px 22px; transition: border-color .2s, transform .2s;
+  }
+  .project:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .project h3 { font-size: 17px; font-weight: 600; }
+  .project p { color: var(--muted); font-size: 15px; margin-top: 6px; }
+  .tags { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 8px; }
+  .tag {
+    font-size: 12px; color: var(--muted);
+    border: 1px solid var(--line); border-radius: 999px; padding: 2px 10px;
+  }
+  .project .links { margin-top: 12px; font-size: 14px; display: flex; gap: 16px; }
+
+  /* Skills */
+  .skills { display: grid; grid-template-columns: 150px 1fr; gap: 14px 28px; }
+  .skills dt { color: var(--muted); font-size: 14px; padding-top: 2px; }
+  .skills dd { display: flex; flex-wrap: wrap; gap: 8px; }
+
+  /* Simple lists (awards, certificates, languages) */
+  .plain { list-style: none; }
+  .plain li { display: grid; grid-template-columns: 150px 1fr; gap: 8px 28px; margin-bottom: 12px; }
+  .plain .when { padding-top: 0; }
+
+  /* References */
+  .refs { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; }
+  .ref strong { display: block; font-weight: 600; }
+  .ref span { display: block; color: var(--muted); font-size: 14px; }
+
+  /* Footer */
+  footer { border-top: 1px solid var(--line); padding: 32px 0 56px; color: var(--muted); font-size: 14px; }
+  footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+
+  /* ---------- Mobile ---------- */
+  @media (max-width: 640px) {
+    nav ul { gap: 14px; }
+    header { padding: 56px 0 40px; }
+    .hero { flex-direction: column; align-items: flex-start; gap: 20px; }
+    .entry, .skills, .plain li { grid-template-columns: 1fr; gap: 2px; }
+    .skills dd { margin-bottom: 8px; }
+  }
+
+  /* ---------- Print (Ctrl+P > Save as PDF gives a clean CV) ---------- */
+  @media print {
+    nav { display: none; }
+    body { background: #fff; color: #000; font-size: 11pt; }
+    header { padding: 0 0 20px; }
+    section { padding: 20px 0; break-inside: avoid; }
+    .project:hover { transform: none; }
+    a { color: #000; }
+  }
+</style>
+</head>
+
+<body>
+
+<!-- ================= NAVIGATION ================= -->
+<nav>
+  <div class="wrap">
+    <!-- EDIT: your name or initials -->
+    <a class="brand" href="#top">Your Name</a>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#skills">Skills</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ================= HEADER ================= -->
+<header id="top">
+  <div class="wrap hero">
+    <!-- EDIT: put your photo in the same folder and change the file name.
+         Delete this <img> line if you don't want a photo. -->
+    <img class="photo" src="lucky.jpeg" alt="Photo of Irankunda Lucky">
+
+    <div>
+      <!-- EDIT: name, title, contact details -->
+      <h1>Irankunda Lucky</h1>
+      <p class="role">Computer Science Student </p>
+      <div class="contact">
+        <span>Kampala, Uganda</span>
+        <a href="mailto:you@example.com">irankundalucky8@gmail.com</a>
+        <a href="tel:+256700000000">+256 775582623</a>
+        <a href="https://linkedin.com/in/yourname" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://github.com/yourname" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- ================= ABOUT ================= -->
+<section id="about">
+  <div class="wrap">
+    <h2>About</h2>
+    <!-- EDIT: 2-4 sentences: who you are, what you study, what you are looking for -->
+    <p>
+      I am Computer Science student at Uganda Christian University, passionate about 
+      technology, programming, learning new skills and learning new tools.
+    </p>
+    <p>
+      
+    </p>
+  </div>
+</section>
+
+<!-- ================= EDUCATION ================= -->
+<section id="education">
+  <div class="wrap">
+    <h2>Education</h2>
+
+    <!-- EDIT: copy/paste a whole <div class="entry"> block to add more -->
+    <div class="entry">
+      <div class="when">2026 – Present</div>
+      <div>
+        <h3>Bachelor of Science in Computer Sciece </h3>
+        <div class="where">Uganda Christian University, Kampala, Mukono</div>
+        <ul>
+          <li>Current GPA / Class: 0.0 / 0.0 (optional)</li>
+          <li>Relevant courses: Fundamentals in Computering, Essentials of Hardware and Software , Structured programming</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="when">2024 – 2025</div>
+      <div>
+        <h3>Uganda Advanced Certificate of Education (UACE)</h3>
+        <div class="where">Masaka Secondary School</div>
+        <ul>
+          <li>Principal passes in: Mathematics, Fine Art</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= EXPERIENCE ================= -->
+<section id="experience">
+  <div class="wrap">
+    <h2>Experience</h2>
+
+    <div class="entry">
+      <div class="when">Feb 2026 – Jul 2026</div>
+      <div>
+        <h3>Mathematics Tutor</h3>
+        <div class="where">Kyeshero CVSS, Kanungu</div>
+        <ul>
+          <li>Built / helped with solving Mathematical problems which resulted in students pursuing excellence in the subject.</li>
+          <li>Worked with senior teachers to help the young endeavors.</li>
+        </ul>
+      </div>
+    </div>
+
+    
+
+<!-- ================= PROJECTS ================= -->
+<section id="projects">
+  <div class="wrap">
+    <h2>Projects</h2>
+    <div class="projects">
+
+      <!-- EDIT: copy/paste a whole <article class="project"> block to add more -->
+      <article class="project">
+        <h3>Fast Track Dispensary project</h3>
+        <p>A Substainable Development Goal 3 targets universal health, coverage and access to safe, effective,
+          quality and affordable essential medicines for all patients managing lifelong chronic conditions.</p>
+        <div class="tags">
+          <span class="tag">HTML</span>
+          <span class="tag">CSS</span>
+          <span class="tag">Python</span>
+        </div>
+        
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================= SKILLS ================= -->
+<section id="skills">
+  <div class="wrap">
+    <h2>Skills</h2>
+    <dl class="skills">
+      <dt>Data Entry</dt>
+      <dd>
+        <span class="tag">HTML &amp; CSS</span>
+        <span class="tag">C programming</span>
+        <span class="tag">Python</span>
+        
+        <span class="tag">Git</span>
+      </dd>
+
+      <dt>Tools</dt>
+      <dd>
+        <span class="tag">VS Code</span>
+        <span class="tag">Excel</span>
+        <span class="tag">Codeblocks</span>
+      </dd>
+
+      <dt>Soft skills</dt>
+      <dd>
+        <span class="tag">Teamwork</span>
+        <span class="tag">Communication</span>
+        <span class="tag">Problem solving</span>
+      </dd>
+
+      <dt>Languages</dt>
+      <dd>
+        <span class="tag">English (Fluent)</span>
+        <span class="tag">Luganda (Native)</span>
+        <span class="tag"></Rukiga-Runyakole> (Native)</span>
+      </dd>
+    </dl>
+  </div>
+</section>
+
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="wrap">
+    <span>© <span id="year"></span> Irankunda Lucky</span>
+    <span><a href="#top">Back to top ↑</a></span>
+  </div>
+</footer>
+
+<script>
+  // Keeps the footer year up to date automatically
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
